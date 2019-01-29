@@ -17,6 +17,7 @@ module Vending_Machine(
   reg change, dispense;
 
   initial begin
+    //initialize the current state to $0 and turn dispense and change off
     current_state <= 2'b00;
     dispense <= 1'b0;
     change <= 1'b0;
@@ -29,13 +30,13 @@ module Vending_Machine(
       change <= 1'b0;
     end else begin
       case(current_state)
-        2'b00: begin
+        2'b00: begin //$0 state
           if(money == 2'b01) begin //input $0.50
             current_state <= 2'b01; //go to $0.50 state
           end else if (money == 2'b10) begin //input $1
             current_state <= 2'b11; //go to dispense state
           end //end if else
-	dispense <= 1'b0;
+	    dispense <= 1'b0;
         change <= 1'b0;
         end//end 2'b00
 
@@ -45,13 +46,13 @@ module Vending_Machine(
           end else if (money == 2'b10) begin //input $1
             current_state <= 2'b10; //go to return money state
           end //end if else
-	  dispense <= 1'b0;
+	      dispense <= 1'b0;
           change <= 1'b0;
         end //end 2'b01
         
         2'b10:begin//return change state
           current_state <= 2'b00; //go back to $0 state
-	  dispense <= 1'b0;
+	      dispense <= 1'b0;
           change <= 1'b1;
         end //end 2'b10
         
@@ -63,7 +64,7 @@ module Vending_Machine(
           end else if (money == 2'b10) begin //input $1
             current_state <= 2'b11; //dispense another soda
           end //end if else
-	  dispense <= 1'b1;
+	      dispense <= 1'b1;
           change <= 1'b0;
         end //end 2'b11
       endcase
