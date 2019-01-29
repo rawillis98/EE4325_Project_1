@@ -3,10 +3,12 @@ module Vending_Machine(
   rst,
   money,
   dispense,
-  change);
+  change,
+  current_state);
   
   output dispense;
   output change;
+  output current_state;
   
   input clk, rst;
   input [1:0] money;
