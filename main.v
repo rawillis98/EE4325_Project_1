@@ -11,9 +11,9 @@ module Vending_Machine(
   output current_state;
   
   input clk, rst;
-  input [1:0] money;
+  input [1:0] money; //2 bit array " "
   
-  reg [1:0] current_state;
+  reg [2:0] current_state; //3 bit array
   reg change, dispense;
 
   initial begin
@@ -23,7 +23,7 @@ module Vending_Machine(
     change <= 1'b0;
   end
     
-  always @ (posedge clk or negedge rst) begin
+  always @ (posedge clk) begin
     if (rst) begin
       current_state <= 2'b00; //$0 state 
       dispense <= 1'b0;
