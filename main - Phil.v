@@ -11,62 +11,93 @@ module Vending_Machine(
   output current_state;
   
   input clk, rst;
-  input [1:0] money; //2 bit array " "
+  input [2:0] money;
   
-  reg [2:0] current_state; //3 bit array
+  reg [3:0] current_state;
   reg change, dispense;
 
   initial begin
     //initialize the current state to $0 and turn dispense and change off
-    current_state <= 2'b00;
+    current_state <= 3'b000;
     dispense <= 1'b0;
     change <= 1'b0;
   end
     
   always @ (posedge clk) begin
     if (rst) begin
-      current_state <= 2'b00; //$0 state 
+      current_state <= 3'b000; //$0 state 
       dispense <= 1'b0;
       change <= 1'b0;
     end else begin
       case(current_state)
-        2'b00: begin //$0 state
-          if(money == 2'b01) begin //input $0.50
-            current_state <= 2'b01; //go to $0.50 state
-          end else if (money == 2'b10) begin //input $1
-            current_state <= 2'b11; //go to dispense state
+
+        3'b000: begin //$0 state
+          if(money == 2'b01) begin //input $0.25
+            current_state <= 3'b001; //go to $0.25 state
+          end else if (money == 2'b10) begin //input $0.50
+            current_state <= 3'b010; //go to $0.50 state
+          end else if (money == 2'b11) begin //input $1
+            current_state <= 3'b100; //go to dispense state
           end //end if else
 	    dispense <= 1'b0;
         change <= 1'b0;
-        end//end 2'b00
+        end//end 3'b000
 
-        2'b01:begin //$0.50 state
-          if(money == 2'b01) begin //input $0.50
-            current_state <= 2'b11; //go to dispense state
-          end else if (money == 2'b10) begin //input $1
-            current_state <= 2'b10; //go to return money state
+        3'b001:begin //$0.25 state
+          if(money == 2'b01) begin //input $0.25
+            current_state <= 3'b010; //go to $0.50 state
+          end else if (money == 2'b10) begin //input $0.50
+            current_state <= 3'b011; //go to $0.75 state
+          end else if (money == 2'b11) begin //input $1
+            current_state <= 3'b101; //go to overflow state
           end //end if else
-	      dispense <= 1'b0;
-          change <= 1'b0;
-        end //end 2'b01
-        
-        2'b10:begin//return change state
-          current_state <= 2'b00; //go back to $0 state
-	      dispense <= 1'b0;
-          change <= 1'b1;
-        end //end 2'b10
-        
-        2'b11: begin//dispense soda state
-          if(money == 2'b00) begin //if nothing else is put in
-            current_state <= 2'b00; //go to $0 state
-          end else if (money == 2'b01) begin //input $0.50
-            current_state <= 2'b01; //go to $0.50 state
-          end else if (money == 2'b10) begin //input $1
-            current_state <= 2'b11; //dispense another soda
+	    dispense <= 1'b0;
+        change <= 1'b0;
+        end//end 3'b001
+
+        3'b010:begin //$0.50 state
+          if(money == 2'b01) begin //input $0.25
+            current_state <= 3'b011; //go to $0.75 state
+          end else if (money == 2'b10) begin //input $0.50
+            current_state <= 3'b100; //go to Dispense state
+          end else if (money == 2'b11) begin //input $1
+            current_state <= 3'b101; //go to overflow state
+          end //end if else
+	    dispense <= 1'b0;
+        change <= 1'b0;
+        end//end 3'b010
+
+        3'b011:begin //$0.75 state
+          if(money == 2'b01) begin //input $0.25
+            current_state <= 3'b100; //go to Dispense state
+          end else if (money == 2'b10) begin //input $0.50
+            current_state <= 3'b101; //go to overflow state
+          end else if (money == 2'b11) begin //input $1
+            current_state <= 3'b101; //go to overflow state
+          end //end if else
+	    dispense <= 1'b0;
+        change <= 1'b0;
+        end//end 3'b011
+
+        3'b100:begin //Dispense soda state
+          if(money == 3'b000) begin //if nothing else is put in
+            current_state <= 3'b000; //go to $0 state
+          end else if (money == 2'b01) begin //input $0.25
+            current_state <= 3'b001; //go to $0.25 state
+          end else if (money == 2'b10) begin //input $0.50
+            current_state <= 3'b010; //go to $0.50 state
+          end else if (money == 2'b11) begin //input $1
+            current_state <= 3'b100; //Dispense another Soda
           end //end if else
 	      dispense <= 1'b1;
           change <= 1'b0;
-        end //end 2'b11
+        end //end 2'b100
+
+        3'b101:begin //Return change state
+          current_state <= 3'b000; //go back to $0 state
+	      dispense <= 1'b0;
+          change <= 1'b1;
+        end //end 3'b101
       endcase
     end
   end
