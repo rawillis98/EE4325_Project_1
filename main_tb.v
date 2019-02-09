@@ -1,7 +1,7 @@
 module Vending_Machine_tb;
   reg clk, rst;
   reg [1:0] money;
-  wire [1:0] current_state;
+  wire [2:0] current_state;
   wire dispense, change;
 
   //Instantiate a vending machine
@@ -24,18 +24,21 @@ module Vending_Machine_tb;
     rst = 0;
     #1
     money = 2'b00; //input $0 (should do nothing)
-    #10
-    money = 2'b10; //input $1 (should dispense)
-    #10
-    money = 2'b00; //input $0 (should do nothing
-    #10
-    money = 2'b00; //input $0 (should do nothing)
-    #10
-    money = 2'b01; //input $0.50 (should change states)
-    #10
-    money = 2'b10; //input $1 (should return money (change state))
-    #10
-    money = 2'b00; //input $0 should do nothing
+	#10
+	money = 2'b01;
+	#10 
+	money = 2'b01;
+	#10
+	money = 2'b01;
+	#10
+	money = 2'b01;
+	#10
+	money = 2'b00;
+	#10
+	money = 2'b10;
+	#10
+	money = 2'b11;
+    
   end
 
   always

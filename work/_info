@@ -9,46 +9,46 @@ z2
 cModel Technology
 dC:/Modeltech_pe_edu_10.4a/examples
 vVending_Machine
-!s110 1548727794
+Z0 !s110 1549747901
 !i10b 1
-!s100 7P0K?@2>K][CH^mNMBndG1
-IhlfCb1M>bD?QG^02f7LZk3
-Z0 VDg1SIo80bB@j0V0VzS_@n1
-Z1 dC:/Users/ricwi/Box/19S/EE 4325/Project 1
-w1548726772
-8C:/Users/ricwi/Box/19S/EE 4325/Project 1/main.v
-FC:/Users/ricwi/Box/19S/EE 4325/Project 1/main.v
+!s100 =2A?YBo>VjTXT<2a7a_?a1
+Ig:OU1514PDTQJzU983k2f1
+Z1 VDg1SIo80bB@j0V0VzS_@n1
+Z2 dC:/Users/ricwi/Box/19S/EE 4325/Project 1
+w1549747885
+8C:\Users\ricwi\Box\19S\EE 4325\Project 1\main.v
+FC:\Users\ricwi\Box\19S\EE 4325\Project 1\main.v
 L0 1
-Z2 OP;L;10.4a;61
+Z3 OP;L;10.4a;61
 r1
 !s85 0
 31
-!s108 1548727794.000000
-!s107 C:/Users/ricwi/Box/19S/EE 4325/Project 1/main.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/ricwi/Box/19S/EE 4325/Project 1/main.v|
+!s108 1549747900.000000
+!s107 C:\Users\ricwi\Box\19S\EE 4325\Project 1\main.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:\Users\ricwi\Box\19S\EE 4325\Project 1\main.v|
 !s101 -O0
 !i113 1
-Z3 o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact -O0
+Z4 o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact -O0
 n@vending_@machine
 vVending_Machine_tb
-!s110 1548727795
-!i10b 1
-!s100 SiHWllConPV@1DX>Lo>=01
-I5N_RNB]H@i@5oRlV??`iH1
 R0
+!i10b 1
+!s100 Vcd2E;MYo5aDI?Jh:@Tc<3
+IkB:<c>=l^5?hcoKTZR=7R0
 R1
-w1548727790
-8C:/Users/ricwi/Box/19S/EE 4325/Project 1/main_tb.v
-FC:/Users/ricwi/Box/19S/EE 4325/Project 1/main_tb.v
-L0 1
 R2
+w1549747850
+8C:\Users\ricwi\Box\19S\EE 4325\Project 1\main_tb.v
+FC:\Users\ricwi\Box\19S\EE 4325\Project 1\main_tb.v
+L0 1
+R3
 r1
 !s85 0
 31
-!s108 1548727795.000000
-!s107 C:/Users/ricwi/Box/19S/EE 4325/Project 1/main_tb.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/ricwi/Box/19S/EE 4325/Project 1/main_tb.v|
+!s108 1549747901.000000
+!s107 C:\Users\ricwi\Box\19S\EE 4325\Project 1\main_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:\Users\ricwi\Box\19S\EE 4325\Project 1\main_tb.v|
 !s101 -O0
 !i113 1
-R3
+R4
 n@vending_@machine_tb
