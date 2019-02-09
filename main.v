@@ -36,8 +36,7 @@ module Vending_Machine(
           end else if (money == 2'b10) begin //input $0.50
             current_state <= 3'b010; //go to $0.50 state
           end else if (money == 2'b11) begin //input $1
-            current_state <= 3'b100; //go to dispense state
-			dispense <= 1'b1;
+            current_state <= 3'b100; //go to $1 state
           end //end if else
         end//end 3'b000
 
@@ -47,8 +46,8 @@ module Vending_Machine(
           end else if (money == 2'b10) begin //input $0.50
             current_state <= 3'b011; //go to $0.75 state
           end else if (money == 2'b11) begin //input $1
-            current_state <= 3'b101; //go to overflow state
-			change <= 1'b1;
+            current_state <= 3'b110; //go to dispense state
+			dispense <= 1'b1;
           end //end if else
         end//end 3'b001
 
@@ -56,8 +55,7 @@ module Vending_Machine(
           if(money == 2'b01) begin //input $0.25
             current_state <= 3'b011; //go to $0.75 state
           end else if (money == 2'b10) begin //input $0.50
-            current_state <= 3'b100; //go to Dispense state
-			dispense <= 1'b1;
+            current_state <= 3'b100; //go to $1 state
           end else if (money == 2'b11) begin //input $1
             current_state <= 3'b101; //go to overflow state
 			change <= 1;
@@ -66,34 +64,30 @@ module Vending_Machine(
 
         3'b011:begin //$0.75 state
           if(money == 2'b01) begin //input $0.25
-            current_state <= 3'b100; //go to Dispense state
-			dispense <= 1'b1;
+            current_state <= 3'b100; //go to $1 state
           end else if (money == 2'b10) begin //input $0.50
-            current_state <= 3'b101; //go to overflow state
-			change <= 1'b1;
+            current_state <= 3'b110; //go to dispense state
+			dispense <= 1'b1;
           end else if (money == 2'b11) begin //input $1
             current_state <= 3'b101; //go to overflow state
 			change <= 1'b1;
           end //end if else
         end//end 3'b011
 
-        3'b100:begin //Dispense soda state
-          if(money == 3'b000) begin //if nothing else is put in
-            current_state <= 3'b000; //go to $0 state
-			dispense <= 1'b0;
-          end else if (money == 2'b01) begin //input $0.25
-            current_state <= 3'b001; //go to $0.25 state
+        3'b100:begin //$1
+          if (money == 2'b01) begin //input $0.25
+            current_state <= 3'b110; //go to dispense state
 			dispense <= 1'b0;
           end else if (money == 2'b10) begin //input $0.50
-            current_state <= 3'b010; //go to $0.50 state
-			dispense <= 1'b0;
+            current_state <= 3'b101; //go to overflow
+			change <= 1'b0;
           end else if (money == 2'b11) begin //input $1
-            current_state <= 3'b100; //Dispense another Soda
-			dispense <= 1'b1;
+            current_state <= 3'b101; //go to overflow
+			change <= 1'b0;
           end //end if else
         end //end 3'b100
-
-        3'b101:begin //Return change state
+		
+		3'b101:begin //Overflow state
 		  change <= 1'b0;
           if(money == 2'b01) begin //input $0.25
             current_state <= 3'b001; //go to $0.25 state
@@ -103,7 +97,20 @@ module Vending_Machine(
             current_state <= 3'b100; //go to dispense state
 			dispense <= 1'b1;
           end //end if else
-        end //end 3'b101
+        end //end 3'b110
+		
+		3'b110:begin //$1.25
+		  if(money == 2'b00) begin
+		    current_state <= 3'b001;
+          end else if(money == 2'b01) begin //input $0.25
+            current_state <= 3'b001; //go to $0.25 state
+          end else if (money == 2'b10) begin //input $0.50
+            current_state <= 3'b010; //go to $0.50 state
+          end else if (money == 2'b11) begin //input $1
+            current_state <= 3'b100; //go to $1 state
+          end //end if else
+        end //end 3'b100
+		
       endcase
     end
   end
